@@ -1,0 +1,42 @@
+# ========================= Filebeat Input =================================
+filebeat.inputs:
+- type: mqtt
+  hosts:
+    - tcp://127.0.0.1:8432
+  topics:
+    - RCONFIG/*
+    - REVENT/*
+    - REBOOT
+    - RESET
+    - AI
+    - CHECK
+    - STATUS
+  qos: 1
+  client_id: filebeat
+  username: mongta
+  password: 1122!
+
+  # Unique ID among all inputs, an ID is required.
+  #id: my-filestream-id
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+# ------------------------------ Logstash Output -------------------------------
+output.logstash:
+  # The Logstash hosts
+  hosts: ["127.0.0.1:5044"]
+
+  #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+  #ssl.certificate: "/etc/pki/client/cert.pem"
+  #ssl.key: "/etc/pki/client/cert.key"
+
+# ================================= Processors =================================
+#processors:
+  #- add_host_metadata:
+  #    when.not.contains.tags: forwarded
+  #- add_cloud_metadata: ~
+  #- add_docker_metadata: ~
+  #- add_kubernetes_metadata: ~
+
+
